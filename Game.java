@@ -2,22 +2,22 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import java.util.Random;
+import java.io.FileReader;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class Game 
 //implements ActionListener 
 {
 //JTextField userGuess;
   JLabel question;
-  JLabel answerOne;
-  JLabel answerTwo;
-  JLabel answerThree;
-  JLabel answerFour;
   JButton selectOne;
   JButton selectTwo;
   JButton selectThree;
   JButton selectFour;
-
   JLabel yesNo;
+  JLabel score;
   JButton nextQuestion;
 //JButton guessButton;
 //JButton playAgainButton;
@@ -26,24 +26,28 @@ public class Game
 //JLabel lastGuess;
 //Random r = new Random();
 //int randomNum = r.nextInt(100)+1;
+ArrayList<Question> questionList = new ArrayList<Question>();
+String questionText = "";
+String answerOneText = "";
+String answerTwoText = "";
+String answerThreeText = "";
+String answerFourText = "";
+int correct = 0;
+int points = 0;
 
 Game() {
   
-  JFrame frame = new JFrame("US Trivia Game");
+  JFrame frame = new JFrame();
   frame.setLayout(new FlowLayout());
   frame.setSize(240, 240);
 
   question = new JLabel("Insert Question Here");
-  answerOne = new JLabel("Insert Answer 1");
-  selectOne = new JButton("Select");
-  answerTwo = new JLabel("Insert Answer 2");
-  selectTwo = new JButton("Select");
-  answerThree = new JLabel("Insert Answer 3");
-  selectThree = new JButton("Select");
-  answerFour = new JLabel("Insert Answer 4");
-  selectFour = new JButton("Select");
-
+  selectOne = new JButton("Select 1");
+  selectTwo = new JButton("Select 2");
+  selectThree = new JButton("Select 3");
+  selectFour = new JButton("Select 4");
   yesNo = new JLabel("Try Again or Correct");
+  score = new JLabel("Your score is: ");
   nextQuestion = new JButton("Next Question");
 
 //userGuess = new JTextField(10);
@@ -67,19 +71,46 @@ Game() {
 //frame.add(playAgainButton);
 
 frame.add(question);
-frame.add(answerOne);
 frame.add(selectOne);
-frame.add(answerTwo);
 frame.add(selectTwo);
-frame.add(answerThree);
 frame.add(selectThree);
-frame.add(answerFour);
 frame.add(selectFour);
 frame.add(yesNo);
+frame.add(score);
 frame.add(nextQuestion);
 
   frame.setVisible(true);
-}
+
+//FileReader
+ try {
+      FileReader myFile;
+      myFile = new FileReader("trivia.txt");
+      BufferedReader reader = new BufferedReader(myFile);
+
+      while(reader.ready()) {
+        questionText = reader.readLine();
+        answerOneText = reader.readLine();
+        answerTwoText = reader.readLine();
+        answerThreeText = reader.readLine();
+        answerFourText = reader.readLine();
+        correct = Integer.parseInt(reader.readLine());
+        points = Integer.parseInt(reader.readLine());
+        //Person thePerson = new Person(name, Integer.parseInt(age), capital);
+       //people.add(thePerson);
+      }
+      reader.close();
+    }
+  catch (IOException exception) {
+      System.out.println("An error occurred: " + exception);
+      }
+    
+  //Storing Read Data into Question Object
+  new Question(questionText,answerOneText, answerTwoText, answerThreeText, answerFourText, correct, points );
+
+    /*for(int i=0; i<questionList.size(); i++) {
+      questionList.add(get(i).getQuestionText(),get(i).getAnswerOneText(), get(i).getAnswerTwoText, get(i).getAnswerThreeText(), get(i).getAnswerFourText, get(i).getCorrect(), get(i).getPoints());
+      */
+    }
 
 /*
 public void actionPerformed(ActionEvent ae) {
