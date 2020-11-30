@@ -10,7 +10,6 @@ import java.util.ArrayList;
 public class Game 
 //implements ActionListener 
 {
-//JTextField userGuess;
   JLabel question;
   JButton selectOne;
   JButton selectTwo;
@@ -19,21 +18,18 @@ public class Game
   JLabel yesNo;
   JLabel score;
   JButton nextQuestion;
-//JButton guessButton;
-//JButton playAgainButton;
-//JLabel enterGuess;
-//JLabel highLow;
-//JLabel lastGuess;
-//Random r = new Random();
-//int randomNum = r.nextInt(100)+1;
-ArrayList<Question> questionList = new ArrayList<Question>();
-String questionText = "";
-String answerOneText = "";
-String answerTwoText = "";
-String answerThreeText = "";
-String answerFourText = "";
-int correct = 0;
-int points = 0;
+
+//Creating Question List ArrayList
+    ArrayList<Question> questionList = new ArrayList<Question>();
+
+    //Setting Variables to Defaults or Zero
+    String questionText = "";
+    String answerOneText = "";
+    String answerTwoText = "";
+    String answerThreeText = "";
+    String answerFourText = "";
+    int correct = 0;
+    int points = 0;
 
 Game() {
   
@@ -49,26 +45,6 @@ Game() {
   yesNo = new JLabel("Try Again or Correct");
   score = new JLabel("Your score is: ");
   nextQuestion = new JButton("Next Question");
-
-//userGuess = new JTextField(10);
-//userGuess.setActionCommand("myTF");
-
-//guessButton = new JButton("Guess");
-//playAgainButton = new JButton("Play Again");
-
-//guessButton.addActionListener(this);
-//playAgainButton.addActionListener(this);
-
-//enterGuess = new JLabel("Enter your guess: ");
-//highLow = new JLabel("");
-//lastGuess = new JLabel("");
-
-//frame.add(enterGuess);
-//frame.add(userGuess);
-//frame.add(guessButton);
-//frame.add(highLow);
-//frame.add(lastGuess);
-//frame.add(playAgainButton);
 
 frame.add(question);
 frame.add(selectOne);
@@ -95,22 +71,18 @@ frame.add(nextQuestion);
         answerFourText = reader.readLine();
         correct = Integer.parseInt(reader.readLine());
         points = Integer.parseInt(reader.readLine());
-        //Person thePerson = new Person(name, Integer.parseInt(age), capital);
-       //people.add(thePerson);
+
+        //Creating Question Object
+         Question theQuestion = new Question(questionText, answerOneText, answerTwoText, answerThreeText, answerFourText, correct, points);
+        //Adding Question Objects to ArrayList
+         questionList.add(theQuestion);
       }
       reader.close();
     }
-  catch (IOException exception) {
+    //Catch Block - Reader
+    catch (IOException exception) {
       System.out.println("An error occurred: " + exception);
       }
-    
-  //Storing Read Data into Question Object
-  new Question(questionText,answerOneText, answerTwoText, answerThreeText, answerFourText, correct, points );
-
-    /*for(int i=0; i<questionList.size(); i++) {
-      questionList.add(get(i).getQuestionText(),get(i).getAnswerOneText(), get(i).getAnswerTwoText, get(i).getAnswerThreeText(), get(i).getAnswerFourText, get(i).getCorrect(), get(i).getPoints());
-      */
-    }
 
 /*
 public void actionPerformed(ActionEvent ae) {
@@ -143,4 +115,4 @@ public void actionPerformed(ActionEvent ae) {
     }
 }
 */
-}
+}}

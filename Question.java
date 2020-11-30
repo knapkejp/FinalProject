@@ -47,6 +47,4 @@ int getPoints(){
   return points;
 }
 
-
-
 }
