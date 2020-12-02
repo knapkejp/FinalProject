@@ -18,11 +18,12 @@ public class Game
   JLabel yesNo;
   JLabel score;
   JButton nextQuestion;
+  String insert;
 
 //Creating Question List ArrayList
     ArrayList<Question> questionList = new ArrayList<Question>();
 
-    //Setting Variables to Defaults or Zero
+//Setting Variables to Defaults or Zero
     String questionText = "";
     String answerOneText = "";
     String answerTwoText = "";
@@ -33,29 +34,9 @@ public class Game
 
 Game() {
   
-  JFrame frame = new JFrame();
-  frame.setLayout(new FlowLayout());
-  frame.setSize(240, 240);
-
-  question = new JLabel("Insert Question Here");
-  selectOne = new JButton("Select 1");
-  selectTwo = new JButton("Select 2");
-  selectThree = new JButton("Select 3");
-  selectFour = new JButton("Select 4");
-  yesNo = new JLabel("Try Again or Correct");
-  score = new JLabel("Your score is: ");
-  nextQuestion = new JButton("Next Question");
-
-frame.add(question);
-frame.add(selectOne);
-frame.add(selectTwo);
-frame.add(selectThree);
-frame.add(selectFour);
-frame.add(yesNo);
-frame.add(score);
-frame.add(nextQuestion);
-
-  frame.setVisible(true);
+JFrame frame = new JFrame();
+frame.setLayout(new FlowLayout());
+frame.setSize(360, 180);
 
 //FileReader
  try {
@@ -83,6 +64,28 @@ frame.add(nextQuestion);
     catch (IOException exception) {
       System.out.println("An error occurred: " + exception);
       }
+    
+     //System.out.println(questionList.get(3).getAnswerThreeText());
+
+  question = new JLabel(questionList.get(0).getQuestionText());
+  selectOne = new JButton(questionList.get(0).getAnswerOneText());
+  selectTwo = new JButton(questionList.get(0).getAnswerTwoText());
+  selectThree = new JButton(questionList.get(0).getAnswerThreeText());
+  selectFour = new JButton(questionList.get(0).getAnswerFourText());
+  yesNo = new JLabel("Try Again or Correct");
+  score = new JLabel("Your score is: ");
+  nextQuestion = new JButton("Next Question");
+
+frame.add(question);
+frame.add(selectOne);
+frame.add(selectTwo);
+frame.add(selectThree);
+frame.add(selectFour);
+frame.add(yesNo);
+frame.add(score);
+frame.add(nextQuestion);
+
+frame.setVisible(true);
 
 /*
 public void actionPerformed(ActionEvent ae) {
