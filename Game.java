@@ -7,9 +7,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class Game 
-//implements ActionListener 
-{
+public class Game implements ActionListener {
   JLabel question;
   JButton selectOne;
   JButton selectTwo;
@@ -36,7 +34,7 @@ Game() {
   
 JFrame frame = new JFrame();
 frame.setLayout(new FlowLayout());
-frame.setSize(360, 180);
+frame.setSize(300, 180);
 
 //FileReader
  try {
@@ -65,17 +63,30 @@ frame.setSize(360, 180);
       System.out.println("An error occurred: " + exception);
       }
     
-     //System.out.println(questionList.get(3).getAnswerThreeText());
-
+     
+//Populating Labels and Buttons with ArrayList Data
   question = new JLabel(questionList.get(0).getQuestionText());
   selectOne = new JButton(questionList.get(0).getAnswerOneText());
+  //selectOne = new JButton("");
   selectTwo = new JButton(questionList.get(0).getAnswerTwoText());
+  //selectTwo = new JButton("");
   selectThree = new JButton(questionList.get(0).getAnswerThreeText());
+  //selectThree = new JButton("");
   selectFour = new JButton(questionList.get(0).getAnswerFourText());
-  yesNo = new JLabel("Try Again or Correct");
-  score = new JLabel("Your score is: ");
+  //selectFour = new JButton("");
+selectOne.addActionListener(this);
+selectTwo.addActionListener(this);
+selectThree.addActionListener(this);
+selectFour.addActionListener(this);
+
+
+  yesNo = new JLabel("");
+  score = new JLabel("");
   nextQuestion = new JButton("Next Question");
 
+nextQuestion.addActionListener(this);
+
+//Adding objects to frame and making the GUI visible
 frame.add(question);
 frame.add(selectOne);
 frame.add(selectTwo);
@@ -84,26 +95,60 @@ frame.add(selectFour);
 frame.add(yesNo);
 frame.add(score);
 frame.add(nextQuestion);
-
 frame.setVisible(true);
 
-/*
-public void actionPerformed(ActionEvent ae) {
-  if(ae.getActionCommand().equals("Guess")) {
-    int guess = Integer.parseInt(userGuess.getText());
-    lastGuess.setText("Last Guess: "+guess);
+}
 
-    if(guess == randomNum) {
-      highLow.setText("You got it! ");
+// Making GUI functional
+public void actionPerformed(ActionEvent ae) {
+  if(question.getText().equals(questionList.get(0).getQuestionText())){
+    if(ae.getActionCommand().equals(questionList.get(0).getAnswerTwoText())){
+    points = (questionList.get(0).getPoints());
+    yesNo.setText("");
+    score.setText("Correct! Your score is: "+points);
     }
-    else if(guess > randomNum) {
-      highLow.setText("Too high! ");
+    else if(ae.getActionCommand().equals("Next Question")){
+    score.setText("");
+    question.setText(questionList.get(1).getQuestionText());
+    selectOne.setText(questionList.get(1).getAnswerOneText());
+    selectTwo.setText(questionList.get(1).getAnswerTwoText());
+    selectThree.setText(questionList.get(1).getAnswerThreeText());
+    selectFour.setText(questionList.get(1).getAnswerFourText());
     }
     else {
-      highLow.setText("Too low! ");
+    yesNo.setText("Wrong Answer! Try Again");
+    score.setText(""); 
     }
   }
-    
+  else if(question.getText().equals(questionList.get(1).getQuestionText())){
+    if(ae.getActionCommand().equals(questionList.get(1).getAnswerOneText())){
+    yesNo.setText("");
+    points = points+(questionList.get(1).getPoints());
+    score.setText("Correct! Your score is: "+points++);
+    }
+    else if(ae.getActionCommand().equals("Next Question")){
+    score.setText("");
+    question.setText(questionList.get(2).getQuestionText());
+    selectOne.setText(questionList.get(2).getAnswerOneText());
+    selectTwo.setText(questionList.get(2).getAnswerTwoText());
+    selectThree.setText(questionList.get(2).getAnswerThreeText());
+    selectFour.setText(questionList.get(2).getAnswerFourText());
+    }
+    else {
+    yesNo.setText("Wrong Answer! Try Again");
+    score.setText(""); 
+    }
+  }
+  else{
+    question.setText("Testing Testing");
+  }
+
+}
+}
+
+
+
+/*    
   else if(ae.getActionCommand().equals("Play Again")) {
     randomNum = r.nextInt(100)+1;
   
@@ -117,5 +162,32 @@ public void actionPerformed(ActionEvent ae) {
     highLow.setText("Your pressed Enter. Please press the Guess Button");
     }
 }
-*/
 }}
+*/
+
+/* QUestion 1 works and flips to question 2
+  if(ae.getActionCommand().equals(questionList.get(0).getAnswerTwoText())){
+    yesNo.setText("");
+    points = (questionList.get(0).getPoints());
+    score.setText("Correct! Your score is: "+points);
+  }
+  else if(ae.getActionCommand().equals(questionList.get(0).getAnswerOneText())){
+    yesNo.setText("Please Try Again");
+    score.setText("");
+  }
+  else if(ae.getActionCommand().equals(questionList.get(0).getAnswerThreeText())){
+    yesNo.setText("Please Try Again");
+    score.setText("");
+  }
+  else if(ae.getActionCommand().equals("Next Question")){
+    question.setText(questionList.get(1).getQuestionText());
+    selectOne.setText(questionList.get(1).getAnswerOneText());
+    selectTwo.setText(questionList.get(1).getAnswerTwoText());
+    selectThree.setText(questionList.get(1).getAnswerThreeText());
+    selectFour.setText(questionList.get(1).getAnswerFourText());
+  }
+  else {
+    yesNo.setText("Please Try Again");
+    score.setText("");
+    }
+  */
