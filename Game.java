@@ -79,9 +79,8 @@ selectTwo.addActionListener(this);
 selectThree.addActionListener(this);
 selectFour.addActionListener(this);
 
-
-  yesNo = new JLabel("");
   score = new JLabel("");
+  yesNo = new JLabel("");
   nextQuestion = new JButton("Next Question");
 
 nextQuestion.addActionListener(this);
@@ -92,8 +91,8 @@ frame.add(selectOne);
 frame.add(selectTwo);
 frame.add(selectThree);
 frame.add(selectFour);
-frame.add(yesNo);
 frame.add(score);
+frame.add(yesNo);
 frame.add(nextQuestion);
 frame.setVisible(true);
 
@@ -106,6 +105,7 @@ public void actionPerformed(ActionEvent ae) {
     points = (questionList.get(0).getPoints());
     yesNo.setText("");
     score.setText("Correct! Your score is: "+points);
+    selectTwo.setEnabled(false);
     }
     else if(ae.getActionCommand().equals("Next Question")){
     score.setText("");
@@ -114,17 +114,20 @@ public void actionPerformed(ActionEvent ae) {
     selectTwo.setText(questionList.get(1).getAnswerTwoText());
     selectThree.setText(questionList.get(1).getAnswerThreeText());
     selectFour.setText(questionList.get(1).getAnswerFourText());
+    selectTwo.setEnabled(true);
     }
     else {
     yesNo.setText("Wrong Answer! Try Again");
-    score.setText(""); 
+    score.setText("");
     }
   }
   else if(question.getText().equals(questionList.get(1).getQuestionText())){
     if(ae.getActionCommand().equals(questionList.get(1).getAnswerOneText())){
     yesNo.setText("");
+    selectOne.setEnabled(false);
     points = points+(questionList.get(1).getPoints());
-    score.setText("Correct! Your score is: "+points++);
+    //points = points+points;
+    score.setText("Correct! Your score is: "+points);
     }
     else if(ae.getActionCommand().equals("Next Question")){
     score.setText("");
@@ -133,6 +136,109 @@ public void actionPerformed(ActionEvent ae) {
     selectTwo.setText(questionList.get(2).getAnswerTwoText());
     selectThree.setText(questionList.get(2).getAnswerThreeText());
     selectFour.setText(questionList.get(2).getAnswerFourText());
+    selectOne.setEnabled(true);
+    }
+    else {
+    yesNo.setText("Wrong Answer! Try Again");
+    score.setText(""); 
+    }
+  }
+  else if(question.getText().equals(questionList.get(2).getQuestionText())){
+    if(ae.getActionCommand().equals(questionList.get(2).getAnswerOneText())){
+    yesNo.setText("");
+    points = points+(questionList.get(2).getPoints());
+    //points = points+points;
+    score.setText("Correct! Your score is: "+points);
+    selectOne.setEnabled(false);
+    }
+    else if(ae.getActionCommand().equals("Next Question")){
+    score.setText("");
+    question.setText(questionList.get(3).getQuestionText());
+    selectOne.setText(questionList.get(3).getAnswerOneText());
+    selectTwo.setText(questionList.get(3).getAnswerTwoText());
+    selectThree.setText(questionList.get(3).getAnswerThreeText());
+    selectFour.setText(questionList.get(3).getAnswerFourText());
+    selectOne.setEnabled(true);
+    }
+    else {
+    yesNo.setText("Wrong Answer! Try Again");
+    score.setText("");
+    }
+  }
+  else if(question.getText().equals(questionList.get(3).getQuestionText())){
+    if(ae.getActionCommand().equals(questionList.get(3).getAnswerThreeText())){
+    yesNo.setText("");
+    points = points+(questionList.get(3).getPoints());
+    //points = points+points;
+    score.setText("Correct! Your score is: "+points);
+    selectThree.setEnabled(false);
+    }
+    else if(ae.getActionCommand().equals("Next Question")){
+    score.setText("");
+    question.setText(questionList.get(4).getQuestionText());
+    selectOne.setText(questionList.get(4).getAnswerOneText());
+    selectTwo.setText(questionList.get(4).getAnswerTwoText());
+    selectThree.setText(questionList.get(4).getAnswerThreeText());
+    selectFour.setText(questionList.get(4).getAnswerFourText());
+    selectThree.setEnabled(true);
+    }
+    else {
+    yesNo.setText("Wrong Answer! Try Again");
+    score.setText("");
+    }
+  }
+  else if(question.getText().equals(questionList.get(4).getQuestionText())){
+    if(ae.getActionCommand().equals(questionList.get(4).getAnswerFourText())){
+    yesNo.setText("");
+    points = points+(questionList.get(4).getPoints());
+    //points = points+points;
+    score.setText("Correct! Your score is: "+points);
+    selectFour.setEnabled(false);
+    }
+    else if(ae.getActionCommand().equals("Next Question")){
+    score.setText("Your Final Score is: " +points);
+    yesNo.setText("Thanks for playing! The game is over");
+    }
+    else {
+    yesNo.setText("Wrong Answer! Try Again");
+    score.setText(""); 
+    }
+  }
+}
+}
+  /*
+  else if(question.getText().equals(questionList.get(2).getQuestionText())){
+    if(ae.getActionCommand().equals(questionList.get(1).getAnswerOneText())){
+    yesNo.setText("");
+    points = points+(questionList.get(2).getPoints());
+    score.setText("Correct! Your score is: "+points++);
+    }
+    else if(ae.getActionCommand().equals("Next Question")){
+    score.setText("");
+    question.setText(questionList.get(3).getQuestionText());
+    selectOne.setText(questionList.get(3).getAnswerOneText());
+    selectTwo.setText(questionList.get(3).getAnswerTwoText());
+    selectThree.setText(questionList.get(3).getAnswerThreeText());
+    selectFour.setText(questionList.get(3).getAnswerFourText());
+    }
+    else {
+    yesNo.setText("Wrong Answer! Try Again");
+    score.setText(""); 
+    }
+  }
+  else if(question.getText().equals(questionList.get(3).getQuestionText())){
+    if(ae.getActionCommand().equals(questionList.get(3).getAnswerOneText())){
+    yesNo.setText("");
+    points = points+(questionList.get(3).getPoints());
+    score.setText("Correct! Your score is: "+points++);
+    }
+    else if(ae.getActionCommand().equals("Next Question")){
+    score.setText("");
+    question.setText(questionList.get(4).getQuestionText());
+    selectOne.setText(questionList.get(4).getAnswerOneText());
+    selectTwo.setText(questionList.get(4).getAnswerTwoText());
+    selectThree.setText(questionList.get(4).getAnswerThreeText());
+    selectFour.setText(questionList.get(4).getAnswerFourText());
     }
     else {
     yesNo.setText("Wrong Answer! Try Again");
@@ -140,11 +246,26 @@ public void actionPerformed(ActionEvent ae) {
     }
   }
   else{
-    question.setText("Testing Testing");
+    //if(ae.getActionCommand().equals(questionList.get(4).getAnswerOneText())){
+    yesNo.setText("");
+    points = points+(questionList.get(4).getPoints());
+    score.setText("Correct! Your score is: "+points++);
+    }
+    if(ae.getActionCommand().equals("Next Question")){
+    score.setText("");
+    question.setText(questionList.get(4).getQuestionText());
+    selectOne.setText(questionList.get(4).getAnswerOneText());
+    selectTwo.setText(questionList.get(4).getAnswerTwoText());
+    selectThree.setText(questionList.get(4).getAnswerThreeText());
+    selectFour.setText(questionList.get(4).getAnswerFourText());
+    }
+    else {
+    yesNo.setText("Wrong Answer! Try Again");
+    score.setText(""); 
+    }
   }
+  */
 
-}
-}
 
 
 
