@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.util.Random;
 import java.io.FileReader;
 import java.io.BufferedReader;
+import java.io.FileWriter;
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -29,6 +31,8 @@ public class Game implements ActionListener {
     String answerFourText = "";
     int correct = 0;
     int points = 0;
+    int finalPoints = 0;
+    int incorrect = 0;
 
 Game() {
   
@@ -62,7 +66,6 @@ frame.setSize(300, 180);
     catch (IOException exception) {
       System.out.println("An error occurred: " + exception);
       }
-    
      
 //Populating Labels and Buttons with ArrayList Data
   question = new JLabel(questionList.get(0).getQuestionText());
@@ -102,7 +105,7 @@ frame.setVisible(true);
 public void actionPerformed(ActionEvent ae) {
   if(question.getText().equals(questionList.get(0).getQuestionText())){
     if(ae.getActionCommand().equals(questionList.get(0).getAnswerTwoText())){
-    points = (questionList.get(0).getPoints());
+    points = incorrect+(questionList.get(0).getPoints());
     yesNo.setText("");
     score.setText("Correct! Your score is: "+points);
     selectTwo.setEnabled(false);
@@ -117,8 +120,9 @@ public void actionPerformed(ActionEvent ae) {
     selectTwo.setEnabled(true);
     }
     else {
-    yesNo.setText("Wrong Answer! Try Again");
+    yesNo.setText("Wrong Answer! -2 Points");
     score.setText("");
+    incorrect = -2;
     }
   }
   else if(question.getText().equals(questionList.get(1).getQuestionText())){
@@ -139,8 +143,9 @@ public void actionPerformed(ActionEvent ae) {
     selectOne.setEnabled(true);
     }
     else {
-    yesNo.setText("Wrong Answer! Try Again");
-    score.setText(""); 
+    yesNo.setText("Wrong Answer! -2 Points");
+    score.setText("");
+    points = points-2;
     }
   }
   else if(question.getText().equals(questionList.get(2).getQuestionText())){
@@ -161,8 +166,9 @@ public void actionPerformed(ActionEvent ae) {
     selectOne.setEnabled(true);
     }
     else {
-    yesNo.setText("Wrong Answer! Try Again");
+    yesNo.setText("Wrong Answer! -2 Points");
     score.setText("");
+    points = points-2;
     }
   }
   else if(question.getText().equals(questionList.get(3).getQuestionText())){
@@ -183,132 +189,41 @@ public void actionPerformed(ActionEvent ae) {
     selectThree.setEnabled(true);
     }
     else {
-    yesNo.setText("Wrong Answer! Try Again");
+    yesNo.setText("Wrong Answer! -2 Points");
     score.setText("");
+    points = points-2;
     }
   }
   else if(question.getText().equals(questionList.get(4).getQuestionText())){
     if(ae.getActionCommand().equals(questionList.get(4).getAnswerFourText())){
     yesNo.setText("");
     points = points+(questionList.get(4).getPoints());
-    //points = points+points;
+    finalPoints = points;
     score.setText("Correct! Your score is: "+points);
     selectFour.setEnabled(false);
+    try {
+    FileWriter toWriteFile;
+    toWriteFile = new FileWriter("scores.txt");
+    BufferedWriter output = new BufferedWriter(toWriteFile);
+
+    output.write(Integer.toString(finalPoints));
+
+    output.close();
+  }
+
+  catch (IOException exception) {
+      System.out.println("An error occurred: " + exception);
+      }
     }
     else if(ae.getActionCommand().equals("Next Question")){
     score.setText("Your Final Score is: " +points);
     yesNo.setText("Thanks for playing! The game is over");
     }
     else {
-    yesNo.setText("Wrong Answer! Try Again");
-    score.setText(""); 
+    yesNo.setText("Wrong Answer! -2 Points");
+    score.setText("");
+    points = points-2; 
     }
   }
 }
 }
-  /*
-  else if(question.getText().equals(questionList.get(2).getQuestionText())){
-    if(ae.getActionCommand().equals(questionList.get(1).getAnswerOneText())){
-    yesNo.setText("");
-    points = points+(questionList.get(2).getPoints());
-    score.setText("Correct! Your score is: "+points++);
-    }
-    else if(ae.getActionCommand().equals("Next Question")){
-    score.setText("");
-    question.setText(questionList.get(3).getQuestionText());
-    selectOne.setText(questionList.get(3).getAnswerOneText());
-    selectTwo.setText(questionList.get(3).getAnswerTwoText());
-    selectThree.setText(questionList.get(3).getAnswerThreeText());
-    selectFour.setText(questionList.get(3).getAnswerFourText());
-    }
-    else {
-    yesNo.setText("Wrong Answer! Try Again");
-    score.setText(""); 
-    }
-  }
-  else if(question.getText().equals(questionList.get(3).getQuestionText())){
-    if(ae.getActionCommand().equals(questionList.get(3).getAnswerOneText())){
-    yesNo.setText("");
-    points = points+(questionList.get(3).getPoints());
-    score.setText("Correct! Your score is: "+points++);
-    }
-    else if(ae.getActionCommand().equals("Next Question")){
-    score.setText("");
-    question.setText(questionList.get(4).getQuestionText());
-    selectOne.setText(questionList.get(4).getAnswerOneText());
-    selectTwo.setText(questionList.get(4).getAnswerTwoText());
-    selectThree.setText(questionList.get(4).getAnswerThreeText());
-    selectFour.setText(questionList.get(4).getAnswerFourText());
-    }
-    else {
-    yesNo.setText("Wrong Answer! Try Again");
-    score.setText(""); 
-    }
-  }
-  else{
-    //if(ae.getActionCommand().equals(questionList.get(4).getAnswerOneText())){
-    yesNo.setText("");
-    points = points+(questionList.get(4).getPoints());
-    score.setText("Correct! Your score is: "+points++);
-    }
-    if(ae.getActionCommand().equals("Next Question")){
-    score.setText("");
-    question.setText(questionList.get(4).getQuestionText());
-    selectOne.setText(questionList.get(4).getAnswerOneText());
-    selectTwo.setText(questionList.get(4).getAnswerTwoText());
-    selectThree.setText(questionList.get(4).getAnswerThreeText());
-    selectFour.setText(questionList.get(4).getAnswerFourText());
-    }
-    else {
-    yesNo.setText("Wrong Answer! Try Again");
-    score.setText(""); 
-    }
-  }
-  */
-
-
-
-
-/*    
-  else if(ae.getActionCommand().equals("Play Again")) {
-    randomNum = r.nextInt(100)+1;
-  
-    enterGuess.setText("Enter your guess: ");
-    highLow.setText("");
-    lastGuess.setText("");
-    userGuess.setText("");
-    }
-
-  else {
-    highLow.setText("Your pressed Enter. Please press the Guess Button");
-    }
-}
-}}
-*/
-
-/* QUestion 1 works and flips to question 2
-  if(ae.getActionCommand().equals(questionList.get(0).getAnswerTwoText())){
-    yesNo.setText("");
-    points = (questionList.get(0).getPoints());
-    score.setText("Correct! Your score is: "+points);
-  }
-  else if(ae.getActionCommand().equals(questionList.get(0).getAnswerOneText())){
-    yesNo.setText("Please Try Again");
-    score.setText("");
-  }
-  else if(ae.getActionCommand().equals(questionList.get(0).getAnswerThreeText())){
-    yesNo.setText("Please Try Again");
-    score.setText("");
-  }
-  else if(ae.getActionCommand().equals("Next Question")){
-    question.setText(questionList.get(1).getQuestionText());
-    selectOne.setText(questionList.get(1).getAnswerOneText());
-    selectTwo.setText(questionList.get(1).getAnswerTwoText());
-    selectThree.setText(questionList.get(1).getAnswerThreeText());
-    selectFour.setText(questionList.get(1).getAnswerFourText());
-  }
-  else {
-    yesNo.setText("Please Try Again");
-    score.setText("");
-    }
-  */
